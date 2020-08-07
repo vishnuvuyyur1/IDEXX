@@ -15,7 +15,7 @@
   - Deploymnet: Docker container
   
   ## Output
-  - step1: A search box
+  - step1: A search box : http://localhost:4200/
   <img width="960" alt="Capture" src="https://user-images.githubusercontent.com/22782834/89647075-38b49a00-d8bd-11ea-8975-210206b02199.PNG">
   - step2: Results sorted by Title  
   <img width="949" alt="Capture2" src="https://user-images.githubusercontent.com/22782834/89647189-71547380-d8bd-11ea-800e-daad4bde2fdd.PNG">
@@ -55,11 +55,11 @@
   
   API Operations:
   
-  |No| Operation | Endpoint | Method
-|----|---|---|---|
-|1| get books and albums  |/combi?term=value| GET |
-|2| get books (optional)| /books?term=value | GET |
-|3| get albums (optional)| /albums?term=value |GET | 
+  |No| Operation | Endpoint | Method | avg resp times
+|----|---|---|---| ---|
+|1| get books and albums  |/combi?term=value| GET | <6 sec|
+|2| get books (optional)| /books?term=value | GET | <6 sec|
+|3| get albums (optional)| /albums?term=value |GET | <6 sec|
 
 ## 1. get books and albums
 - URI: /combi?term=value
@@ -144,3 +144,8 @@ Response : Array (5 Books and 5 Albums). Results Configurable, and preconfigured
     }
 ]
 ```
+## API Testing
+- Postman Integration Tests
+- JUnit 
+- Mockito
+- Spring MockMVC
