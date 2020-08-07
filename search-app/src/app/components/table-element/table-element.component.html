@@ -1,0 +1,18 @@
+<table class="table" *ngIf="searchResults | async as results">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">Title</th>
+      <th scope="col">Authors</th>
+      <th scope="col">Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let result of results; let i=index">
+      <th scope="row">{{i+1}}</th>
+      <td>{{result.title}}</td>
+      <td>{{result.authors}}</td>
+      <td>{{result.type}}<br /></td>
+    </tr>
+  </tbody>
+</table>

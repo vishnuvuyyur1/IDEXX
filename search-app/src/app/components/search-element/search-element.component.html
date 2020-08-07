@@ -1,0 +1,28 @@
+<form class="space" [formGroup]="termFrom" (ngSubmit)="onSubmit()">
+    <div class="row form-group">
+        <span style="float: right;margin-top: 12px;">
+            <h6>Term :</h6>
+        </span>
+        <div class="col-md-8">
+            <input type="text" class="form-control form-control-lg" placeholder="Enter search term"
+                formControlName="term" [ngClass]="{ 'is-invalid': submitted && f.term.errors }" />
+            <div *ngIf="submitted && f.term.errors" class="invalid-feedback">
+                <div *ngIf="f.term.errors.required">Search term is required</div>
+                <div *ngIf="f.term.errors.pattern">Invalid Pattern</div>
+            </div>
+        </div>
+        <div>
+            <button [disabled]="loading" class="btn btn-primary">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                Search</button>
+        </div>
+    </div>
+</form>
+<div *ngIf="error" class="alert alert-danger">
+    <div style="display:inline-block;">An Unknown Error</div>
+    <div class="closeBtn">
+        <button (click)="close()" type="button" class="close" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</div>
