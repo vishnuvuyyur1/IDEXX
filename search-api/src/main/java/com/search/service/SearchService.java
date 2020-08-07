@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
 /**
- * Service to perform business logic, interact with 3rd party apis
+ * Service to perform business logic, interact with 3rd party apis asynchronous way
  *
  */
 @Slf4j
@@ -73,6 +73,9 @@ public class SearchService implements ISearchService {
 						Mono<String> errMsg = response.bodyToMono(String.class);
 						log.error(errMsg.block());
 						return Mono.just(new ArrayList<>());
+						// Results originating from one upstream service (and its stability /
+						// performance)
+						// may not affect the results originating from the other upstream service.
 					}
 					;
 					return response.bodyToMono(BookResponse.class)
@@ -90,6 +93,9 @@ public class SearchService implements ISearchService {
 			Mono<AlbumResponse> albumResp = Mono.just(AlbumResponse.READER.readValue(response));
 			return albumResp.map(album -> responseMapper.mapFromAlbumResponse(album));
 		} catch (IOException e) {
+			// Results originating from one upstream service (and its stability /
+			// performance)
+			// may not affect the results originating from the other upstream service.
 			log.error(e.getMessage());
 			return Mono.just(new ArrayList<>());
 		}
