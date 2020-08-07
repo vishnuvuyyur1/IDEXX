@@ -25,6 +25,11 @@
   
   ![idexx](https://user-images.githubusercontent.com/22782834/89648465-87fbca00-d8bf-11ea-8624-34c41d979fd6.png)
   
+  Search web app: http://localhost:4200/ <br>
+  Search web API: http://localhost:8080/search/api/v1 <br>
+  Google books Reference: https://developers.google.com/books/docs/v1/reference/volumes/list <br>
+  Itunes Reference: https://affiliate.itunes.apple.com/resources/documentation/itunes-store-web-service-search-api/#searching <br>
+  
    ## Instructions to run:
    With Docker: <br>
    - Need to have git installed. Clone the project: git clone https://github.com/vishnuvuyyur1/IDEXX.git
@@ -149,3 +154,13 @@ Response : Array (5 Books and 5 Albums). Results Configurable, and preconfigured
 - JUnit 
 - Mockito
 - Spring MockMVC
+
+## Useful docker commands
+- docker build -t search-app-image .
+- docker image ls
+- docker rmi search-app-image
+- docker run --name search-app-container -d -p 4200:80 search-app-image
+- docker container ls
+- docker stop search-app-container
+- docker rm search-app-container
+
