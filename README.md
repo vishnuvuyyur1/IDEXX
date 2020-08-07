@@ -149,3 +149,13 @@ Response : Array (5 Books and 5 Albums). Results Configurable, and preconfigured
 - JUnit 
 - Mockito
 - Spring MockMVC
+
+## Useful docker commands
+- docker build -t search-app-image .
+- docker image ls
+- docker rmi search-app-image
+- docker run --name search-app-container -d -p 4200:80 search-app-image
+- docker container ls
+- docker stop search-app-container
+- docker rm search-app-container
+
