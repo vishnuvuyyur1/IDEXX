@@ -47,3 +47,100 @@
    - Step1: build the project : mvn clean install
    - Step2: Run the project  : java -jar search-api.jar from target folder
    - Open Google chrome/ firefox etc Enter : http://localhost:4200/
+   
+ ## API Documentation
+  Base URL: http://localhost:8080/search/api/v1 <br>
+  Health check: http://localhost:8080/actuator/health <br>
+  Metrics: http://localhost:8080/actuator/metrics/http.client.requests <br>
+  
+  API Operations:
+  
+  |No| Operation | Endpoint | Method
+|----|---|---|---|
+|1| get books and albums  |/combi?term=value| GET |
+|2| get books (optional)| /books?term=value | GET |
+|3| get albums (optional)| /albums?term=value |GET | 
+
+## 1. get books and albums
+- URI: /combi?term=value
+- Method: GET
+<br>
+Request Body : None
+
+Response : Array
+ |Attributes|Type|
+|----|---|
+|title|string | 
+|authors|Array[string] | 
+|type|string | 
+
+```
+[
+    {
+        "title": "Aeroplane",
+        "authors": [
+            "Red Hot Chili Peppers"
+        ],
+        "type": "ALBUM"
+    },
+    {
+        "title": "Aeroplane Construction, Operation and Maintenance",
+        "authors": [
+            "John B. Rathbun"
+        ],
+        "type": "BOOK"
+    },
+    {
+        "title": "Loss of Mail by Aeroplane Fire",
+        "authors": [
+            "United States. Congress. House. Committee on Post Office and Post Roads"
+        ],
+        "type": "BOOK"
+    },
+    {
+        "title": "Mr. Aeroplane",
+        "authors": [
+            "Gemáy van Jaarsveld"
+        ],
+        "type": "BOOK"
+    },
+    {
+        "title": "My Enemy",
+        "authors": [
+            "Aeroplane"
+        ],
+        "type": "ALBUM"
+    },
+    {
+        "title": "Sambal (Extended Mix)",
+        "authors": [
+            "Aeroplane & Purple Disco Machine"
+        ],
+        "type": "ALBUM"
+    },
+    {
+        "title": "Save Me Now",
+        "authors": [
+            "Aeroplane"
+        ],
+        "type": "ALBUM"
+    },
+    {
+        "title": "The Aeroplane",
+        "authors": null,
+        "type": "BOOK"
+    },
+    {
+        "title": "The Shape of the Aeroplane",
+        "authors": null,
+        "type": "BOOK"
+    },
+    {
+        "title": "Whispers",
+        "authors": [
+            "Aeroplane"
+        ],
+        "type": "ALBUM"
+    }
+]
+```
