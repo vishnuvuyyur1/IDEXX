@@ -67,7 +67,7 @@
 <br>
 Request Body : None
 
-Response : Array
+Response : Array (5 Books and 5 Albums). Results Configurable, and preconfigured to 5 
  |Attributes|Type|
 |----|---|
 |title|string | 
