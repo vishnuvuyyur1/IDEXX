@@ -19,3 +19,4 @@
   <img width="949" alt="Capture2" src="https://user-images.githubusercontent.com/22782834/89647189-71547380-d8bd-11ea-800e-daad4bde2fdd.PNG">
   
   ## Architecture approach
+  Client - Server architecture
