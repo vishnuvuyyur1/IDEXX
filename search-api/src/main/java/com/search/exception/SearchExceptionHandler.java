@@ -13,23 +13,25 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import com.search.model.ExceptionResponse;
 
+/**
+ * Exception handler for the entire API
+ *
+ */
 @ControllerAdvice
 public class SearchExceptionHandler extends ResponseEntityExceptionHandler {
-	
+
 	@ExceptionHandler(SearchApiException.class)
-	public final ResponseEntity<?> handleCustomerDetailsApiException(SearchApiException ex,
-			WebRequest request) {
-		 ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
-			        request.getDescription(false));
+	public final ResponseEntity<?> handleCustomerDetailsApiException(SearchApiException ex, WebRequest request) {
+		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
+				request.getDescription(false));
 		return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-	
 
 	@Override
-	protected ResponseEntity<Object> handleMissingServletRequestParameter(
-			MissingServletRequestParameterException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-		 ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
-			        request.getDescription(false));
+	protected ResponseEntity<Object> handleMissingServletRequestParameter(MissingServletRequestParameterException ex,
+			HttpHeaders headers, HttpStatus status, WebRequest request) {
+		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
+				request.getDescription(false));
 		return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
 	}
 }

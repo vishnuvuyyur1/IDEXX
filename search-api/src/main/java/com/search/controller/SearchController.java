@@ -23,41 +23,41 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequestMapping("/search/api/v1")
 public class SearchController {
-	
+
 	private static final String REQUEST_PARAM_TERM = "term";
 	private static final String PATH_BOOK = "/books";
 	private static final String PATH_ALBUMS = "/albums";
 	private static final String PATH_COMBI = "/combi";
-	
-	
+
 	@Autowired
-	SearchService searchService;
-	
+	private SearchService searchService;
+
 	@GetMapping(PATH_BOOK)
 	public Mono<List<ApiResponse>> getBooks(@RequestParam(name = REQUEST_PARAM_TERM, required = true) String term) {
 		try {
-		return searchService.searchForBook(term);
+			return searchService.searchForBook(term);
 		} catch (Exception ex) {
 			log.error(ex.getMessage());
 			throw new SearchApiException(ex.getMessage(), ex);
 		}
 	}
-	
+
 	@GetMapping(PATH_ALBUMS)
 	public Mono<List<ApiResponse>> getAlbums(@RequestParam(name = REQUEST_PARAM_TERM, required = true) String term) {
 		try {
-		return searchService.searchForAlbums(term);
-		}  catch (Exception ex) {
+			return searchService.searchForAlbums(term);
+		} catch (Exception ex) {
 			log.error(ex.getMessage());
 			throw new SearchApiException(ex.getMessage(), ex);
 		}
 	}
-	
+
 	@GetMapping(PATH_COMBI)
-	public Mono<List<ApiResponse>>  getBooksAndAlbums(@RequestParam(name = REQUEST_PARAM_TERM, required = true) String term) {
+	public Mono<List<ApiResponse>> getBooksAndAlbums(
+			@RequestParam(name = REQUEST_PARAM_TERM, required = true) String term) {
 		try {
 			return searchService.combiSearch(term);
-		}  catch (Exception ex) {
+		} catch (Exception ex) {
 			log.error(ex.getMessage());
 			throw new SearchApiException(ex.getMessage(), ex);
 		}

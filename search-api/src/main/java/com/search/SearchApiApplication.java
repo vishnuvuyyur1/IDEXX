@@ -9,27 +9,27 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 public class SearchApiApplication {
-	
-	@Value("${server.cors.mapping}") 
+
+	@Value("${server.cors.mapping}")
 	String mapping;
-	@Value("#{'${server.cors.allowedorigins}'.split(',')}") 
+	@Value("#{'${server.cors.allowedorigins}'.split(',')}")
 	String[] allowedOrigins;
-	@Value("#{'${server.cors.allowedmethods}'.split(',')}") 
+	@Value("#{'${server.cors.allowedmethods}'.split(',')}")
 	String[] allowedMethods;
-	@Value("#{'${server.cors.allowedheaders}'.split(',')}") 
+	@Value("#{'${server.cors.allowedheaders}'.split(',')}")
 	String[] allowedHeaders;
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(SearchApiApplication.class, args);
 	}
-	
+
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping(mapping).allowedMethods(allowedMethods).allowedOrigins(allowedOrigins).allowedHeaders(allowedHeaders)
-				.allowCredentials(true);
+				registry.addMapping(mapping).allowedMethods(allowedMethods).allowedOrigins(allowedOrigins)
+						.allowedHeaders(allowedHeaders).allowCredentials(true);
 			}
 		};
 	}

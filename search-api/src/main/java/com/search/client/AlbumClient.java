@@ -9,12 +9,16 @@ import java.nio.charset.StandardCharsets;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * Http client to interact with Itunes API
+ *
+ */
 @Component
 public class AlbumClient implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 	public static final AlbumClient albumClient = new AlbumClient();
-	
+
 	public String get(String link) throws IOException {
 		URL url = new URL(link);
 		try (BufferedReader in = new BufferedReader(

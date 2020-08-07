@@ -21,6 +21,10 @@ import com.search.model.BookResponse;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
+/**
+ * Service to perform business logic, interact with 3rd party apis
+ *
+ */
 @Slf4j
 @Service
 public class SearchService implements ISearchService {
@@ -32,9 +36,9 @@ public class SearchService implements ISearchService {
 
 	@Value("${search.results.limt}")
 	private int resultLimit;
-	
+
 	private final WebClient booksClient;
-	
+
 	private static final String BOOKS_API = "https://www.googleapis.com/books";
 	private static final String BOOKS_API_PATH = "/v1/volumes";
 	private static final String BOOKS_API_PARAM_TERM = "q";
@@ -42,15 +46,15 @@ public class SearchService implements ISearchService {
 	private static final String ALBUMS_API = "https://itunes.apple.com/search";
 	private static final String ALBUMS_API_PARAM_TERM = "term";
 	private static final String ALBUMS_API_PARAM_LIMIT = "limit";
-	
+
 	public SearchService(WebClient.Builder webClientBuilder) {
 		this.booksClient = webClientBuilder.baseUrl(BOOKS_API).build();
 	}
 
 	@Override
 	public Mono<List<ApiResponse>> combiSearch(String term) {
-		 Comparator<ApiResponse> comparator
-	      = (h1, h2) -> h1.getTitle().toLowerCase().compareTo(h2.getTitle().toLowerCase());
+		Comparator<ApiResponse> comparator = (h1, h2) -> h1.getTitle().toLowerCase()
+				.compareTo(h2.getTitle().toLowerCase());
 		return Mono.zip(searchForBook(term), searchForAlbums(term), (book, album) -> {
 			List<ApiResponse> resp = new ArrayList<>();
 			resp.addAll(book);
@@ -62,11 +66,18 @@ public class SearchService implements ISearchService {
 	@Override
 	public Mono<List<ApiResponse>> searchForBook(String term) {
 		log.info("Search for book started");
-		return this.booksClient.get()
-				.uri(uriBuilder -> uriBuilder.path(BOOKS_API_PATH).queryParam(BOOKS_API_PARAM_TERM, term)
-						.queryParam(BOOKS_API_PARAM_LIMIT, resultLimit).build())
-				.retrieve().bodyToMono(BookResponse.class)
-				.map(book -> responseMapper.mapFromBookResponse(book));
+		return this.booksClient.get().uri(uriBuilder -> uriBuilder.path(BOOKS_API_PATH)
+				.queryParam(BOOKS_API_PARAM_TERM, term).queryParam(BOOKS_API_PARAM_LIMIT, resultLimit).build())
+				.exchange().flatMap(response -> {
+					if (response.statusCode().isError()) {
+						Mono<String> errMsg = response.bodyToMono(String.class);
+						log.error(errMsg.block());
+						return Mono.just(new ArrayList<>());
+					}
+					;
+					return response.bodyToMono(BookResponse.class)
+							.map(book -> responseMapper.mapFromBookResponse(book));
+				});
 	}
 
 	@Override
@@ -76,12 +87,12 @@ public class SearchService implements ISearchService {
 			String url = UriComponentsBuilder.fromUriString(ALBUMS_API).queryParam(ALBUMS_API_PARAM_TERM, term)
 					.queryParam(ALBUMS_API_PARAM_LIMIT, resultLimit).build().toUriString();
 			String response = albumClient.get(url);
-			Mono<AlbumResponse> albumResp= Mono.just(AlbumResponse.READER.readValue(response));
+			Mono<AlbumResponse> albumResp = Mono.just(AlbumResponse.READER.readValue(response));
 			return albumResp.map(album -> responseMapper.mapFromAlbumResponse(album));
 		} catch (IOException e) {
-			log.error(e.getMessage());;
+			log.error(e.getMessage());
+			return Mono.just(new ArrayList<>());
 		}
-		return null;
 	}
 
 }
