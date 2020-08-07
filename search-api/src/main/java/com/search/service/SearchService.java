@@ -22,7 +22,8 @@ import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
 /**
- * Service to perform business logic, interact with 3rd party apis asynchronous way
+ * Service to perform business logic, interact with 3rd party apis asynchronous
+ * way
  *
  */
 @Slf4j
@@ -34,8 +35,8 @@ public class SearchService implements ISearchService {
 	@Autowired
 	ResponseMapper responseMapper;
 
-	//Limit of results on upstream services are configurable per environment 
-    //and preconfigured to 5
+	// Limit of results on upstream services are configurable per environment
+	// and preconfigured to 5
 	@Value("${search.results.limt}")
 	private int resultLimit;
 
@@ -55,7 +56,7 @@ public class SearchService implements ISearchService {
 
 	@Override
 	public Mono<List<ApiResponse>> combiSearch(String term) {
-		//Sorting the results by title alphabetically
+		// Sorting the results by title alphabetically
 		Comparator<ApiResponse> comparator = (h1, h2) -> h1.getTitle().toLowerCase()
 				.compareTo(h2.getTitle().toLowerCase());
 		return Mono.zip(searchForBook(term), searchForAlbums(term), (book, album) -> {
