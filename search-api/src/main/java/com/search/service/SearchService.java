@@ -30,10 +30,10 @@ import reactor.core.publisher.Mono;
 @Service
 public class SearchService implements ISearchService {
 	@Autowired
-	AlbumClient albumClient;
+	private AlbumClient albumClient;
 
 	@Autowired
-	ResponseMapper responseMapper;
+	private ResponseMapper responseMapper;
 
 	// Limit of results on upstream services are configurable per environment
 	// and preconfigured to 5
