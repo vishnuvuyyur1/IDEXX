@@ -149,6 +149,19 @@ Response : Array (5 Books and 5 Albums). Results Configurable, and preconfigured
     }
 ]
 ```
+## API Exception:
+Eg scenario 1:<br>
+Request: http://localhost:8080/search/api/v1/combi <br>
+Response Body:
+```
+{
+    "timestamp": "2020-08-07T14:12:20.003+00:00",
+    "message": "Required String parameter 'term' is not present",
+    "details": "uri=/search/api/v1/combi"
+}
+```
+
+
 ## API Testing
 - Postman Integration Tests
 - JUnit 
