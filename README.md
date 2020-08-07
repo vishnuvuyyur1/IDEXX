@@ -1,5 +1,5 @@
 # IDEXX
- Technology stack
+ ## Technology stack
  <br> Backend (Rest API)
   - Java 11
   - Spring Boot 2+
@@ -11,4 +11,7 @@
   - Bootstrap 4
   - CSS
   - Environment: Google chrome, mozilla firefox
+  
+  ## Output
+  
   
