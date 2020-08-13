@@ -1,4 +1,7 @@
-# IDEXX
+# Reactive programming
+
+- Demostrate non blocking, reactive approach consuming 3rd party api's and combinig the results
+
  ## Technology stack
  <br> Backend (Rest API)
   - Java 11
