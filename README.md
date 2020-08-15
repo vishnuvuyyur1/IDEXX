@@ -1,4 +1,7 @@
-# IDEXX
+# Reactive programming
+
+- Demostrate non blocking, reactive approach consuming 3rd party api's and combinig the results
+
  ## Technology stack
  <br> Backend (Rest API)
   - Java 11
@@ -44,7 +47,7 @@
    
    With out Docker: <br>
    - Need to have git installed. Clone the project: git clone https://github.com/vishnuvuyyur1/IDEXX.git
-   - Need to have maven, npm, angular cli installed. 
+   - Need to have java11, maven, npm, angular cli installed. 
    - Command prompt: From insider the project folder search-app
    - Step1: build the project : npm install
    - Step2: Run the project  : ng serve --o
